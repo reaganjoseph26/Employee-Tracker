@@ -1,10 +1,9 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-// const {optionDepartment, } = require('./lib/department.js')
-const { viewDepartments, confirmDepartment} = require('./lib/department.js');
-const ConfirmPrompt = require('inquirer/lib/prompts/confirm');
-// const { writeFile, copyFile } = require('./utils/generate-site.js');
-
+const { viewDepartments, confirmDepartment } = require('./lib/department.js');
+const {viewRoles, confirmRole} = require('./lib/role.js')
+const {viewEmployees, confirmEmployee} = require('./lib/employee.js')
+// const ConfirmPrompt = require('inquirer/lib/prompts/confirm');
 
 // connection to database
 const connection = mysql.createConnection({
@@ -15,60 +14,48 @@ const connection = mysql.createConnection({
     database: 'employeetracker'
 });
 
-
 connection.connect(err => {
-
     if (err) throw err;
     console.log('connected as id ' + connection.threadId + '\n');
-});
+    promptUser();
+})
 
-//Opening promt questions
-const promptUser = () => {
-    return inquirer
-    .prompt([
-        {
+
+function promptUser() {
+    inquirer
+    .prompt({
         type: "list",
         name: "promptOptions",
         message: "What would you like to do?",
-        choices: [' View all departments', 'view all roles', 'view all employees', ' add a department', 'add a role',
-        ' add an employee', 'update an employee role'
-        ],
-        validate: nameInput => {
-            if (nameInput) {
-              return true;
-            } else {
-              console.log('Please choose an option !');
-              return false;
-            }
-          }
-        }
-    ])
-}
-
-function init() {
-    promptUser().then(userAnswers => {
-        switch (userAnswers.promptOptions) {
-            case " View all departments":
-                viewDepartments()
-                //query to view all departments in database
-                break;
-            case " add a department":
-                // run Engineer prompts func
-                confirmDepartment()
-                break;
-            // case "Intern":
-            //     // run Intern prompts func
-            //     createIntern()
-            //     break;
-            default: // EXit
-                // generateHTML(employeeArray)
-                console.log('Congratulations, your team is complete!')
-            
-        }
+        choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role',
+            'Add an employee', 'Update an employee role']
     })
+        .then(userAnswers => {
+            switch (userAnswers.promptOptions) {
+                case "View all departments":
+                    viewDepartments()
+                    //query to view all departments in database
+                    break;
+                case "View all roles":
+                    viewRoles()
+                    break;
+                case "View all employees":
+                    viewEmployees()
+                    break;
+                case "Add a department":
+                    // run function to add department
+                    confirmDepartment()
+                    break;
+                case "Add a role":
+                   confirmRole()
+                    break;
+                case "Add an employee":
+                    confirmEmployee()
+                    break;
+                default: // EXit
+                    // generateHTML(employeeArray)
+                    console.log('Congratulations, your team is complete!')
 
+            }
+        })
 }
-
-init();
-
-

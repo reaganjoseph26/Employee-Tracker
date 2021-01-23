@@ -1,10 +1,15 @@
 INSERT INTO department (name)
 VALUES
-("candy"),
-("mandy"),
-("lacy"),
-("macy")
+    ("Sales"),
+    ("Marketing")
 ;
+
+INSERT INTO role (title, salary)
+VALUES
+    ("Manager", 40000)
+;
+
+
 
 
 
