@@ -1,5 +1,9 @@
 const mysql = require('mysql2');
-const runDepartment = require('./lib/department.js')
+const inquirer = require('inquirer');
+// const {optionDepartment, } = require('./lib/department.js')
+const { viewDepartments, confirmDepartment} = require('./lib/department.js');
+const ConfirmPrompt = require('inquirer/lib/prompts/confirm');
+// const { writeFile, copyFile } = require('./utils/generate-site.js');
 
 
 // connection to database
@@ -11,19 +15,60 @@ const connection = mysql.createConnection({
     database: 'employeetracker'
 });
 
+
 connection.connect(err => {
 
     if (err) throw err;
     console.log('connected as id ' + connection.threadId + '\n');
 });
 
-runDepartment()
+//Opening promt questions
+const promptUser = () => {
+    return inquirer
+    .prompt([
+        {
+        type: "list",
+        name: "promptOptions",
+        message: "What would you like to do?",
+        choices: [' View all departments', 'view all roles', 'view all employees', ' add a department', 'add a role',
+        ' add an employee', 'update an employee role'
+        ],
+        validate: nameInput => {
+            if (nameInput) {
+              return true;
+            } else {
+              console.log('Please choose an option !');
+              return false;
+            }
+          }
+        }
+    ])
+}
 
-// simple query
-connection.query(
-    `SELECT * FROM department`,
-    function(err, results, fields) {
-      console.log(results); // results contains rows returned by server
-      console.log(fields); // fields contains extra meta data about results, if available
-    }
-);
+function init() {
+    promptUser().then(userAnswers => {
+        switch (userAnswers.promptOptions) {
+            case " View all departments":
+                viewDepartments()
+                //query to view all departments in database
+                break;
+            case " add a department":
+                // run Engineer prompts func
+                confirmDepartment()
+                break;
+            // case "Intern":
+            //     // run Intern prompts func
+            //     createIntern()
+            //     break;
+            default: // EXit
+                // generateHTML(employeeArray)
+                console.log('Congratulations, your team is complete!')
+            
+        }
+    })
+
+}
+
+init();
+
+
