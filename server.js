@@ -20,7 +20,6 @@ connection.connect(err => {
     promptUser();
 })
 
-
 function promptUser() {
     inquirer
     .prompt({
@@ -30,32 +29,35 @@ function promptUser() {
         choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role',
             'Add an employee', 'Update an employee role']
     })
-        .then(userAnswers => {
+    .then(userAnswers => {
             switch (userAnswers.promptOptions) {
-                case "View all departments":
-                    viewDepartments()
-                    //query to view all departments in database
-                    break;
-                case "View all roles":
-                    viewRoles()
-                    break;
-                case "View all employees":
-                    viewEmployees()
-                    break;
-                case "Add a department":
-                    // run function to add department
-                    confirmDepartment()
-                    break;
-                case "Add a role":
-                   confirmRole()
-                    break;
-                case "Add an employee":
-                    confirmEmployee()
-                    break;
-                default: // EXit
-                    // generateHTML(employeeArray)
-                    console.log('Congratulations, your team is complete!')
+            case "View all departments":
+            viewDepartments()
+            //query to view all departments in database
+            break;
+            case "View all roles":
+            viewRoles()
+            break;
 
-            }
-        })
+            case "View all employees":
+            viewEmployees()
+            break;
+            case "Add a department":
+            // run function to add department
+            confirmDepartment()
+            break;
+
+            case "Add a role":
+            confirmRole()
+            break;
+
+            case "Add an employee":
+            confirmEmployee()
+            break;
+
+            deafult: 'Quit'
+            break;
+
+        }
+    })
 }
