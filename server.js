@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const { viewDepartments, confirmDepartment } = require('./lib/department.js');
+const { viewDepartments, confirmDepartment, exit} = require('./lib/department.js');
 const {viewRoles, confirmRole} = require('./lib/role.js')
 const {viewEmployees, confirmEmployee} = require('./lib/employee.js')
 // const ConfirmPrompt = require('inquirer/lib/prompts/confirm');
@@ -20,6 +20,7 @@ connection.connect(err => {
     promptUser();
 })
 
+
 function promptUser() {
     inquirer
     .prompt({
@@ -27,7 +28,7 @@ function promptUser() {
         name: "promptOptions",
         message: "What would you like to do?",
         choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role',
-            'Add an employee', 'Update an employee role']
+            'Add an employee', 'Update an employee role', 'Exit']
     })
     .then(userAnswers => {
             switch (userAnswers.promptOptions) {
@@ -35,6 +36,7 @@ function promptUser() {
             viewDepartments()
             //query to view all departments in database
             break;
+
             case "View all roles":
             viewRoles()
             break;
@@ -55,9 +57,12 @@ function promptUser() {
             confirmEmployee()
             break;
 
-            deafult: 'Quit'
+            case "Exit":
+            process.exit()
             break;
 
         }
     })
-}
+};
+
+module.exports = promptUser

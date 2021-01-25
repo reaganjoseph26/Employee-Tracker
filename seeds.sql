@@ -7,13 +7,13 @@ VALUES
     ("Customer Service")
 ;
 
-INSERT INTO role (title, salary)
+INSERT INTO role (title, salary, department_id)
 VALUES
-    ("Manager", 80000),
-    ("Supervisor", 50000),
-    ("Team Lead", 40000),
-    ("Associate", 30000),
-     ("Janitor", 25000)
+    ("Manager", 80000, 1),
+    ("Supervisor", 50000, 2),
+    ("Team Lead", 40000, 3),
+    ("Associate", 30000, 4),
+     ("Janitor", 25000, 5)
 ;
 
 INSERT INTO employee (first_name, last_name)
