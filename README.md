@@ -16,9 +16,9 @@
   
 
   ## Installation
-  	* 1. Clone this repo down to your pc.
-    * 2. Install MySQL2 package, https://www.npmjs.com/package/mysql2#installation
-    * 3. install npm inquirer package, https://www.npmjs.com/package/inquirer
+  	1. Clone this repo down to your pc.
+    2. Install MySQL2 package, https://www.npmjs.com/package/mysql2#installation
+    3. install npm inquirer package, https://www.npmjs.com/package/inquirer
 
   ## Usage
   An use of this application would be to keep track of all your employees in your company by category. 
