@@ -1,27 +1,8 @@
-const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const { viewDepartments, confirmDepartment, exit, ViewByDepartment} = require('./lib/department.js');
-const {viewRoles, confirmRole} = require('./lib/role.js')
-const {viewEmployees, confirmEmployee} = require('./lib/employee.js')
-
-
-// connection to database
-const connection = mysql.createConnection({
-    host: 'localhost',
-    // port: 3006,
-    user: 'root',
-    password: 'UT}G5?C5!OzWRw7dvw{&#Y8~?2',
-    database: 'employeetracker'
-});
-
-connection.connect(err => {
-    if (err) throw err;
-    console.log('connected as id ' + connection.threadId + '\n');
-    promptUser();
-})
-
 
 function promptUser() {
+
+
     inquirer
     .prompt({
         type: "list",
@@ -33,7 +14,7 @@ function promptUser() {
     .then(userAnswers => {
             switch (userAnswers.promptOptions) {
             case "View all departments":
-            viewDepartments()
+           viewDepartments();
             //query to view all departments in database
             break;
 
@@ -69,4 +50,10 @@ function promptUser() {
 };
 
 
-module.exports = promptUser
+module.exports = promptUser;
+
+const { viewDepartments, confirmDepartment, exit, ViewByDepartment} = require('./lib/department.js');
+const {viewRoles, confirmRole} = require('./lib/role.js')
+const {viewEmployees, confirmEmployee} = require('./lib/employee.js')
+
+promptUser();
