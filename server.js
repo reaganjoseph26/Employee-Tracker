@@ -39,8 +39,9 @@ function promptUser() {
             break;
 
             case "View employee by Department":
-                ViewByDepartment()
-                    break;
+            ViewByDepartment()
+            break;
+            
             case "Exit":
             process.exit()
             break;

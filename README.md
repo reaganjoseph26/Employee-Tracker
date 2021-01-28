@@ -23,7 +23,7 @@
   ## Usage
   An use of this application would be to keep track of all your employees in your company by category. 
   </br>
-  This is a link to walkthrough the application from the command line: ...
+  This is a link to walkthrough the application from the command line: https://www.youtube.com/watch?v=FCEcj8_uEMU&t=2s
   </br>
 
   ## Credits
